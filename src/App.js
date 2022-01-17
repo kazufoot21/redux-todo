@@ -19,6 +19,10 @@ function App() {
     dispatch({ type: 'EDIT_LIST', payload: name });
   };
 
+  const back = (name) => {
+    dispatch({ type: 'BACK_LIST', payload: name });
+  };
+
   const [name, setInput] = useState('');
   const [complete, setComplete] = useState(false);
 
@@ -70,6 +74,7 @@ function App() {
           .map((list, index) => (
             <li key={index}>
               {list.name}
+              <button onClick={() => back(list.name)}>Back</button>
               <button onClick={() => deleteList(list.name)}>Delete</button>
             </li>
           ))}

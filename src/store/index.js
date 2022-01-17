@@ -35,6 +35,17 @@ const reducer = (state = initialState, action) => {
         }),
       };
 
+    case 'BACK_LIST':
+      return {
+        lists: state.lists.map((list) => {
+          if (list.name !== action.payload) return list;
+          return {
+            ...list,
+            complete: false,
+          };
+        }),
+      };
+
     case 'DELETE_LIST':
       return {
         lists: state.lists.filter((list) => list.name !== action.payload),
