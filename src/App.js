@@ -33,6 +33,7 @@ function App() {
     });
     setInput('');
   };
+
   return (
     <div className="App">
       <h1>Redux Todo リスト作成</h1>
