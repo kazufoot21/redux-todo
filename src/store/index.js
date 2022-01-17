@@ -19,6 +19,10 @@ const reducer = (state = initialState, action) => {
       return {
         lists: [...state.lists, action.payload],
       };
+    case 'EDIT_LIST':
+      return {
+        lists: state.lists.filter((list) => list.name !== action.payload),
+      };
 
     case 'DONE_LIST':
       return {
@@ -30,10 +34,12 @@ const reducer = (state = initialState, action) => {
           };
         }),
       };
+
     case 'DELETE_LIST':
       return {
         lists: state.lists.filter((list) => list.name !== action.payload),
       };
+
     default:
       return state;
   }

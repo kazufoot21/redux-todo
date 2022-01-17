@@ -6,11 +6,17 @@ function App() {
   const lists = useSelector((state) => state.lists);
 
   const dispatch = useDispatch();
+
   const doneList = (name) => {
     dispatch({ type: 'DONE_LIST', payload: name });
   };
   const deleteList = (name) => {
     dispatch({ type: 'DELETE_LIST', payload: name });
+  };
+
+  const edit = (name) => {
+    setInput(name);
+    dispatch({ type: 'EDIT_LIST', payload: name });
   };
 
   const [name, setInput] = useState('');
@@ -44,7 +50,7 @@ function App() {
         placeholder="add your todo"
       ></input>
       <button onClick={addList}>add</button>
-      <h2>Incomplete Todo List</h2>
+      <h2>未完了リスト</h2>
       <ul>
         {lists
           .filter((list) => list.complete === false)
@@ -53,15 +59,19 @@ function App() {
               {list.name}
               <button onClick={() => doneList(list.name)}>Complete</button>
               <button onClick={() => deleteList(list.name)}>Delete</button>
+              <button onClick={() => edit(list.name)}>Edit</button>
             </li>
           ))}
       </ul>
-      <h2>Complete Todo List</h2>
+      <h2>完了リスト</h2>
       <ul>
         {lists
           .filter((list) => list.complete === true)
           .map((list, index) => (
-            <li key={index}>{list.name}</li>
+            <li key={index}>
+              {list.name}
+              <button onClick={() => deleteList(list.name)}>Delete</button>
+            </li>
           ))}
       </ul>
     </div>
